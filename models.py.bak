@@ -1,0 +1,43 @@
+"""Models for existing database"""
+from app import db
+
+
+class User(db.Model):
+    """User model"""
+    __tablename__ = 'user'
+    user_id = db.Column(primary_key=True)
+    login = db.Column(db.String(80), unique=True)
+    salutation = db.Column(db.String(128))
+    title = db.Column(db.String(128))
+    first_name = db.Column(db.String(256))
+    last_name = db.Column(db.String(256))
+    middle_name = db.Column(db.String(256))
+    email = db.Column(db.String(512))
+    gender = db.Column(db.String(1))
+    date_of_birth = db.Column(db.DateTime)
+    # birth_country = db.Column(ForeignKey(
+        # Country, on_delete=db.Column(CASCADE, db_column='birth_country')
+    # birth_nationality = db.Column(ForeignKey(
+        # Country, on_delete=db.Column(CASCADE, db_column='birth_nationality')
+    # current_nationality = db.Column(ForeignKey(
+        # Country, on_delete=db.Column(CASCADE, db_column='current_nationality')
+    marital_status = db.Column(db.String(128))
+    uri = db.Column(db.String(1024), unique=True)
+    date_of_death = db.Column(db.DateTime)
+    type_of_id = db.Column(db.String(1))
+    initials = db.Column(db.String(10))
+    password = db.Column(db.String(36))
+    salt = db.Column(db.String(24))
+    description = db.Column(db.Text)
+    remarks = db.Column(db.Text)
+    image = db.Column(db.LargeBinary)
+    active_p = db.Column(db.String(1))
+    receive_notification = db.Column(db.Boolean)
+    language = db.Column(db.String(5))
+
+    def __init__(self, login, email):
+        self.login = login
+        self.email = email
+
+    def __repr__(self):
+        return '<User %r>' % self.login
